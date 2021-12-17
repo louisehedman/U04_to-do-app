@@ -1,4 +1,25 @@
-<?php include('php_db.php'); ?>
+<?php include('php_db.php'); 
+
+$notset = '';
+if (isset($_POST['add'])) {
+   if (empty($_POST['title'])) {
+      $notset = "Title can't be blank";
+   }
+    else{
+      $query = <<<SQL
+      INSERT INTO list (title, task) VALUES (:title, :task);  
+      SQL;   
+      $statement = $db->prepare($query);
+      $params = [
+      'title' => $_POST['title'],
+      'task' => $_POST['task']
+   ];
+   $statement->execute($params);
+   }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="sv">
 <head>
@@ -11,15 +32,18 @@
 <body>
    <h1>U04 - To do app</h1>
    <form method="post" action="index.php" >
-   <div>
-      <button name="add" type="submit" value="add_task">Add task</button>
-</div>
       <label>title</label>
       <input type="text" name="title" value="">
       <label>task</label>
       <input type="text" name="task" value="">
+      <div>
+         <button name="add" type="submit" value="add_task">Add task</button>
+      </div>
 
    </form>
+   <?php if (isset($notset)) { ?>
+	<p><?php echo $notset; ?></p>
+<?php } ?>
 </body>
 </html>
 
