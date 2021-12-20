@@ -1,5 +1,7 @@
 <?php include('php_db.php'); 
 
+//create
+
 $notset = '';
 if (isset($_POST['add'])) {
    if (empty($_POST['title'])) {
@@ -39,13 +41,36 @@ if (isset($_POST['add'])) {
       <div>
          <button name="add" type="submit" value="add_task">Add task</button>
       </div>
-
    </form>
+
    <?php if (isset($notset)) { ?>
 	<p><?php echo $notset; ?></p>
-<?php } ?>
+   <?php } ?>
+
+   <?php $rows = $db->query('SELECT * FROM list'); ?>
+
+   <table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+         <th>Task</th>
+         <th>Update</th>
+			<th>Delete</th>
+		</tr>
+	</thead>
+   <tbody>
+
+      <?php foreach ($rows as $row) { ?>
+         <tr>
+            <td> <?php echo $row['id']; ?></td>
+				<td> <?php echo $row['title']; ?> </td>
+            <td> <?php echo $row['task']; ?> </td>
+				<td></td>
+            <td></td>
+			</tr>
+      <?php } ?>
+
+   </tbody>
 </body>
 </html>
-
-
-
