@@ -28,18 +28,24 @@ if (isset($_POST['add'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <link rel="stylesheet" type="text/css" href="style.css">
+   <link rel="stylesheet" type="text/css" href="styles.css">
    <title>U04-to-do-app</title>
 </head>
 <body>
+   <header>
    <h1>U04 - To do app</h1>
+   <img src="\assets\img\2022.jpg" />
+   </header>
+   <main>
+   <section>
    <form method="post" action="index.php" >
-      <label>title</label>
+      <label>Title</label>
       <input type="text" name="title" value="">
-      <label>task</label>
+      <br>
+      <label>Task</label>
       <input type="text" name="task" value="">
       <div>
-         <button name="add" type="submit" value="add_task">Add task</button>
+         <button name="add" type="submit" value="add_task" class="submitbtn">Add task</button>
       </div>
    </form>
 
@@ -72,5 +78,10 @@ if (isset($_POST['add'])) {
       <?php } ?>
 
    </tbody>
+      </section>
+   </main>
+   <footer>
+
+   </footer>
 </body>
 </html>
