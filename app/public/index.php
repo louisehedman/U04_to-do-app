@@ -1,5 +1,10 @@
 <?php include('php_db.php'); 
 
+$title = "";
+$task = "";
+$id = 0;
+$update = false;
+
 //create
 
 $notset = '';
@@ -8,18 +13,25 @@ if (isset($_POST['add'])) {
       $notset = "Title can't be blank";
    }
     else{
-      $query = <<<SQL
+      $create = <<<SQL
       INSERT INTO list (title, task) VALUES (:title, :task);  
       SQL;   
-      $statement = $db->prepare($query);
-      $params = [
+      $statement = $db->prepare($create);
+      $input = [
       'title' => $_POST['title'],
       'task' => $_POST['task']
    ];
-   $statement->execute($params);
+   $statement->execute($input);
    }
 }
 
+?>
+
+<?php
+if (isset($_GET['update'])) {
+   $id = $_GET['update'];
+   $update = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -39,13 +51,18 @@ if (isset($_POST['add'])) {
    <main>
    <section>
    <form method="post" action="index.php" >
+      <input type="hidden" name="id" value="";>
       <label>Title</label>
       <input type="text" name="title" value="">
       <br>
       <label>Task</label>
       <input type="text" name="task" value="">
       <div>
-         <button name="add" type="submit" value="add_task" class="submitbtn">Add task</button>
+         <?php if ($update == true): ?>
+            <button type="submit" name="update" >update</button>
+         <?php else: ?>
+            <button type="submit" name="add" class="submitbtn">Add task</button>
+         <?php endif ?>
       </div>
    </form>
 
@@ -72,7 +89,7 @@ if (isset($_POST['add'])) {
             <td> <?php echo $row['id']; ?></td>
 				<td> <?php echo $row['title']; ?> </td>
             <td> <?php echo $row['task']; ?> </td>
-				<td></td>
+				<td> <a href="index.php?update=<?php echo $row['id']; ?>">Update</a></td>
             <td></td>
 			</tr>
       <?php } ?>
