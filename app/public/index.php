@@ -1,8 +1,5 @@
 <?php include('php_db.php'); 
 
-$title = "";
-$task = "";
-$id = 0;
 $update = false;
 
 //create
@@ -13,18 +10,17 @@ if (isset($_POST['add'])) {
       $notset = "Title can't be blank";
    }
     else{
-      $create = <<<SQL
+      $query = <<<SQL
       INSERT INTO list (title, task) VALUES (:title, :task);  
       SQL;   
-      $statement = $db->prepare($create);
-      $input = [
+      $statement = $db->prepare($query);
+      $params = [
       'title' => $_POST['title'],
       'task' => $_POST['task']
    ];
-   $statement->execute($input);
+   $statement->execute($params);
    }
 }
-
 ?>
 
 <?php
@@ -33,6 +29,22 @@ if (isset($_GET['update'])) {
    $update = true;
 }
 ?>
+
+
+<?php
+/*if (isset($_POST['update'])) {
+   $newTitle = $_POST['title'];
+   $newTask = $_POST['task'];
+   $query = 'UPDATE list SET title = :title + task = :task WHERE id = :id';
+   $statement = $db->prepare($query);
+   $params = [
+      'title' => $newTitle,
+      'task' => $newTask
+   ];
+   $statement->execute($params);
+}*/
+?>
+
 
 <!DOCTYPE html>
 <html lang="sv">
