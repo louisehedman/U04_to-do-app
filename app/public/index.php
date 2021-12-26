@@ -27,17 +27,12 @@ if (isset($_POST['add'])) {
 ?>
 
 <?php
+
 if (isset($_GET['update'])) {
    $id = $_GET['update'];
    $update = true;
-   $data = $db->prepare("SELECT * FROM list WHERE id = $id");
-   $data->execute();
 }
-
-
-
 ?>
-
 
 <?php
 if (isset($_POST['update'])) {
