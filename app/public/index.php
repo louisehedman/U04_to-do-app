@@ -1,6 +1,9 @@
 <?php include('php_db.php'); 
 
 $update = false;
+$title = '';
+$task = '';
+$id = 0;
 
 //create
 
@@ -27,22 +30,24 @@ if (isset($_POST['add'])) {
 if (isset($_GET['update'])) {
    $id = $_GET['update'];
    $update = true;
+   $data = $db->prepare("SELECT * FROM list WHERE id = $id");
+   $data->execute();
 }
+
+
+
 ?>
 
 
 <?php
-/*if (isset($_POST['update'])) {
-   $newTitle = $_POST['title'];
-   $newTask = $_POST['task'];
-   $query = 'UPDATE list SET title = :title + task = :task WHERE id = :id';
+if (isset($_POST['update'])) {
+   $id = $_POST['id'];
+   $title = $_POST['title'];
+   $task = $_POST['task'];
+   $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
    $statement = $db->prepare($query);
-   $params = [
-      'title' => $newTitle,
-      'task' => $newTask
-   ];
-   $statement->execute($params);
-}*/
+   $statement->execute();
+}
 ?>
 
 
@@ -63,12 +68,12 @@ if (isset($_GET['update'])) {
    <main>
    <section>
    <form method="post" action="index.php" >
-      <input type="hidden" name="id" value="";>
+      <input type="hidden" name="id" value="<?php echo $id; ?>";>
       <label>Title</label>
-      <input type="text" name="title" value="">
+      <input type="text" name="title" value="<?php echo $title; ?>">
       <br>
       <label>Task</label>
-      <input type="text" name="task" value="">
+      <input type="text" name="task" value="<?php echo $task; ?>">
       <div>
          <?php if ($update == true): ?>
             <button type="submit" name="update" >update</button>
