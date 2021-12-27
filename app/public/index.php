@@ -24,17 +24,19 @@ if (isset($_POST['add'])) {
    $statement->execute($params);
    }
 }
-?>
 
-<?php
 
 if (isset($_GET['update'])) {
    $id = $_GET['update'];
    $update = true;
-}
-?>
+   $rows = $db->query("SELECT * FROM list");
 
-<?php
+   foreach ($rows as $row) {
+      $title = $row['title'];
+      $task = $row['task'];
+   }    
+}
+
 if (isset($_POST['update'])) {
    $id = $_POST['id'];
    $title = $_POST['title'];
@@ -42,6 +44,8 @@ if (isset($_POST['update'])) {
    $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
    $statement = $db->prepare($query);
    $statement->execute();
+   $title = "";
+   $task = "";
 }
 ?>
 
