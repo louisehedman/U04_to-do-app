@@ -47,6 +47,13 @@ if (isset($_POST['update'])) {
    $title = "";
    $task = "";
 }
+
+if (isset($_GET['delete'])) {
+   $id = $_GET['delete'];
+   $query = "DELETE FROM list WHERE id = '$id'";
+   $statement = $db->prepare($query);
+   $statement->execute();
+}
 ?>
 
 
@@ -94,6 +101,7 @@ if (isset($_POST['update'])) {
 			<th>ID</th>
 			<th>Title</th>
          <th>Task</th>
+         <th>Done</th>
          <th>Update</th>
 			<th>Delete</th>
 		</tr>
@@ -105,8 +113,9 @@ if (isset($_POST['update'])) {
             <td> <?php echo $row['id']; ?></td>
 				<td> <?php echo $row['title']; ?> </td>
             <td> <?php echo $row['task']; ?> </td>
-				<td> <a href="index.php?update=<?php echo $row['id']; ?>">Update</a></td>
-            <td></td>
+				<td></td>
+            <td> <a href="index.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a></td>
+            <td> <a href="index.php?delete=<?php echo $row['id']; ?>">&#x274C;</a></td>
 			</tr>
       <?php } ?>
 
