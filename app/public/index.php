@@ -54,6 +54,10 @@ if (isset($_GET['delete'])) {
    $statement = $db->prepare($query);
    $statement->execute();
 }
+
+if (isset($_GET['done'])) {
+   $id = $_GET['done'];
+}
 ?>
 
 
@@ -111,11 +115,11 @@ if (isset($_GET['delete'])) {
       <?php foreach ($rows as $row) { ?>
          <tr>
             <td> <?php echo $row['id']; ?></td>
-				<td> <?php echo $row['title']; ?> </td>
+				<td> <span class="done"><?php echo $row['title']; ?></span> </td>
             <td> <?php echo $row['task']; ?> </td>
-				<td></td>
-            <td> <a href="index.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a></td>
-            <td> <a href="index.php?delete=<?php echo $row['id']; ?>">&#x274C;</a></td>
+				<td> <a href="index.php?done=<?php echo $row['id']; ?>">Done</a> </td>
+            <td> <a href="index.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a> </td>
+            <td> <a href="index.php?delete=<?php echo $row['id']; ?>">&#x274C;</a> </td>
 			</tr>
       <?php } ?>
 
