@@ -14,18 +14,18 @@ if (isset($_POST['add'])) {
    }
     else{
       $query = <<<SQL
-      INSERT INTO list (title, task) VALUES (:title, :task);  
+      INSERT INTO list (title, task, done) VALUES (:title, :task, 0);  
       SQL;   
       $statement = $db->prepare($query);
       $params = [
       'title' => $_POST['title'],
-      'task' => $_POST['task']
+      'task' => $_POST['task'],
    ];
    $statement->execute($params);
    }
 }
 
-
+// update 
 if (isset($_GET['update'])) {
    $id = $_GET['update'];
    $update = true;
@@ -48,6 +48,8 @@ if (isset($_POST['update'])) {
    $task = "";
 }
 
+// delete
+
 if (isset($_GET['delete'])) {
    $id = $_GET['delete'];
    $query = "DELETE FROM list WHERE id = '$id'";
@@ -55,8 +57,13 @@ if (isset($_GET['delete'])) {
    $statement->execute();
 }
 
-if (isset($_GET['done'])) {
-   $id = $_GET['done'];
+// mark as done
+
+if (isset($_GET['as'], $_GET['row'])) {
+   $as = $_GET['as'];
+   $row = $_GET['row'];
+   $query = $db->prepare("UPDATE list SET done = 1 WHERE id = :row");
+   $query->execute(['row' => $row]);
 }
 ?>
 
@@ -114,11 +121,19 @@ if (isset($_GET['done'])) {
 
       <?php foreach ($rows as $row) { ?>
          <tr>
-            <td> <?php echo $row['id']; ?></td>
-				<td> <span class="done"><?php echo $row['title']; ?></span> </td>
-            <td> <?php echo $row['task']; ?> </td>
-				<td> <a href="index.php?done=<?php echo $row['id']; ?>">Done</a> </td>
-            <td> <a href="index.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a> </td>
+            <td> <?php echo $row['id']; ?> </td>
+				<td class="row<?php echo $row['done'] ? ' done' : '' ?>"> <?php echo $row['title']; ?> </td>
+            <td class="row<?php echo $row['done'] ? ' done' : '' ?>" > <?php echo $row['task']; ?> </td>
+            <td> 
+               <?php if (!$row['done']) { ?>
+               <a href="index.php?as=done&row=<?php echo $row['id']; ?>">&#9989;</a> 
+               <?php } ?>
+            </td>
+            <td> 
+               <?php if (!$row['done']) { ?>
+               <a href="index.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a> 
+               <?php } ?> 
+            </td>
             <td> <a href="index.php?delete=<?php echo $row['id']; ?>">&#x274C;</a> </td>
 			</tr>
       <?php } ?>

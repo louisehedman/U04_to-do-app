@@ -47,5 +47,8 @@ table {
     text-align: left;
 }
 
+.done {
+    text-decoration: line-through;
+}
 /*footer {
 }
