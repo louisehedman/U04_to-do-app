@@ -8,12 +8,19 @@
       margin: 2em;
   }
 
+ /* #wrapper {
+      width: 80%;
+      margin: 0 auto;
+  }*/
+
  /* header {
 
   }*/
 
   img {
-      width: 100%;
+      width: 80%;
+      display: block;
+      margin: 0 auto;
   }
 
   h1 {
@@ -25,26 +32,40 @@
   }
 
   form {
-      margin-top: 1.5em;
-      font-size: 2em;
+      display: block; 
+      margin: 1.5em auto;
+      width: 50%;
+      font-size: 1.5em;
+      font-family: 'Courier New', Courier, monospace
   }
 
   input {
       margin-top: 0.5em;
       height: 3em;
-      width: 50%;
+      width: 40%;
       font-size: 20px;
   }
 
 .submitbtn {
-    margin: 0.5em 3em;
+    margin: 0.5em 20%;
     font-size: 0.8em;
 }
 
 table {
-    width: 60%;
+    margin: 0 auto;
+    width: 80%;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.5em;
     border-collapse: collapse;
     text-align: left;
+}
+
+.link {
+    text-decoration: none;
+}
+
+.error {
+    color: red;
 }
 
 .done {
