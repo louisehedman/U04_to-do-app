@@ -1,61 +1,65 @@
-<?php include('php_db.php'); 
+<?php 
+include('php_db.php'); 
+include('create.php');
+include('update.php');
+include('delete.php');
 
-$update = false;
+//$update = false;
 $title = '';
 $task = '';
 $id = 0;
 
 //create
 
-$notset = '';
-if (isset($_POST['add'])) {
-   if (empty($_POST['title'])) {
-      $notset = "Title can't be blank";
-   }
-   elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])){
-      $notset = "Input can't consist of whitespace";
-   }
-    else{
-      $query = <<<SQL
-      INSERT INTO list (title, task, done) VALUES (:title, :task, 0);  
-      SQL;   
-      $statement = $db->prepare($query);
-      $params = [
-      'title' => $_POST['title'],
-      'task' => $_POST['task'],
-   ];
-   $statement->execute($params);
-   }
-}
+//$notset = '';
+//if (isset($_POST['add'])) {
+ //  if (empty($_POST['title'])) {
+ //     $notset = "Title can't be blank";
+ //  }
+//elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])){
+ //     $notset = "Input can't consist of whitespace";
+ //  }
+ //   else{
+  //    $query = <<<SQL
+  //    INSERT INTO list (title, task, done) VALUES (:title, :task, 0);  
+  //    SQL;   
+  //    $statement = $db->prepare($query);
+  //    $params = [
+  //    'title' => $_POST['title'],
+ //     'task' => $_POST['task'],
+ //  ];
+ //  $statement->execute($params);
+ //  }
+//}
 
 // update 
-if (isset($_GET['update'])) {
-   $id = $_GET['update'];
-   $update = true;
-   $rows = $db->query("SELECT * FROM list");
+//if (isset($_GET['update'])) {
+ //  $id = $_GET['update'];
+ //  $update = true;
+//   $rows = $db->query("SELECT * FROM list");
 
-   foreach ($rows as $row) {
-      $title = $row['title'];
-      $task = $row['task'];
-   }    
-}
+//   foreach ($rows as $row) {
+ //     $title = $row['title'];
+ //     $task = $row['task'];
+ //  }    
+// }
 
-if (isset($_POST['update'])) {
-   if (empty($_POST['title'])) {
-      $notset = "Title can't be blank";
-   }
-   elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])){
-      $notset = "Input can't consist of whitespace";
-   }
-   $id = $_POST['id'];
-   $title = $_POST['title'];
-   $task = $_POST['task'];
-   $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
-   $statement = $db->prepare($query);
-   $statement->execute();
-   $title = "";
-   $task = "";
-}
+//if (isset($_POST['update'])) {
+//   if (empty($_POST['title'])) {
+//      $notset = "Title can't be blank";
+ //  }
+ //  elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])){
+ //     $notset = "Input can't consist of whitespace";
+ //  }
+ //  $id = $_POST['id'];
+ //  $title = $_POST['title'];
+ //  $task = $_POST['task'];
+ //  $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
+ //  $statement = $db->prepare($query);
+  // $statement->execute();
+ //  $title = "";
+ //  $task = "";
+//}
 
 // delete
 
@@ -106,7 +110,7 @@ if (isset($_GET['as'], $_GET['row'])) {
                <input id="task" type="text" name="task" value="<?php echo $task; ?>">
                <div>
                   <?php if ($update == true): ?>
-                     <button type="submit" name="update" class="submitbtn">update</button>
+                     <button type="submit" name="update" class="submitbtn">Update</button>
                   <?php else: ?>
                      <button type="submit" name="add" class="submitbtn">Add task</button>
                   <?php endif ?>
