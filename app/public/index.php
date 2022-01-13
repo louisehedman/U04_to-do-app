@@ -1,13 +1,14 @@
 <?php 
-include('php_db.php'); 
+include 'php_db.php'; 
+include 'headerfooter.php';
 //include('create.php');
 //include('update.php');
-include('delete.php');
+//include('delete.php');
 
 //$update = false;
-$title = '';
-$task = '';
-$id = 0;
+//$title = '';
+//$task = '';
+//$id = 0;
 
 //create
 
@@ -63,26 +64,31 @@ $id = 0;
 
 // delete
 
-if (isset($_GET['delete'])) {
-   $id = $_GET['delete'];
-   $query = "DELETE FROM list WHERE id = '$id'";
-   $statement = $db->prepare($query);
-   $statement->execute();
-}
+//if (isset($_GET['delete'])) {
+//   $id = $_GET['delete'];
+//   $query = "DELETE FROM list WHERE id = '$id'";
+//   $statement = $db->prepare($query);
+//   $statement->execute();
+//}
 
 // mark as done
 
-if (isset($_GET['as'], $_GET['row'])) {
-   $as = $_GET['as'];
-   $row = $_GET['row'];
+//if (isset($_GET['as'], $_GET['row'])) {
+//   $as = $_GET['as'];
+//   $row = $_GET['row'];
    
-   $query = $db->prepare("UPDATE list SET done = 1 WHERE id = :row");
-   $query->execute(['row' => $row]);
-}
+//   $query = $db->prepare("UPDATE list SET done = 1 WHERE id = :row");
+//   $query->execute(['row' => $row]);
+//}
 ?>
 
+<?=header_temp('Home')?>
+<img src="\assets\img\2022.jpg" alt="Numbers 2022 on tooth pickers"/>
+<a href="create.php">Create new task</a>
+<a href="read.php">Read page</a>
+<?=footer_temp()?>
 
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="sv">
    <head>
       <meta charset="UTF-8">
@@ -101,13 +107,15 @@ if (isset($_GET['as'], $_GET['row'])) {
       <div id="content-wrap">
       <main>
          <section>
+         <a href="create.php">Create new task</a>
+         <a href="read.php">Read page</a>
             <form method="post" action="index.php" >
-               <input type="hidden" name="id" value="<?php echo $id; ?>";>
+               <input type="hidden" name="id" value="<?//php echo $id; ?>";>
                <label for="title">Title</label>
-               <input id="title" type="text" name="title" value="<?php echo $title; ?>">
+               <input id="title" type="text" name="title" value="<?//php echo $title; ?>">
                <br>
                <label for="task">Task&nbsp;</label>
-               <input id="task" type="text" name="task" value="<?php echo $task; ?>">
+               <input id="task" type="text" name="task" value="<?//php echo $task; ?>">
                <div>
                   <?//php if ($update == true): ?>
                      <button type="submit" name="update" class="submitbtn">Update</button>
@@ -115,12 +123,12 @@ if (isset($_GET['as'], $_GET['row'])) {
                      <button type="submit" name="add" class="submitbtn">Add task</button>
                   <?//php endif ?>
                </div>
-                  <?php if (isset($notset)) { ?>
-                  <p class="error"><?php echo $notset; ?></p>
-                  <?php } ?>
+                  <?//php if (isset($notset)) { ?>
+                  <p class="error"><?//php echo $notset; ?></p>
+                  <? //php } ?>
             </form>
                
-            <?php $rows = $db->query('SELECT * FROM list'); ?>
+            <?//php $rows = $db->query('SELECT * FROM list'); ?>
                
             <table>
             <thead>
@@ -134,28 +142,27 @@ if (isset($_GET['as'], $_GET['row'])) {
                </tr>
             </thead>
             <tbody>
-               <a href="create.php">Create new task</a>
                      
-            <?php foreach ($rows as $row) { ?>
+            <?//php foreach ($rows as $row) { ?>
                <tr>
-                  <td> <?php echo $row['id']; ?> </td>
-                  <td class="row<?php echo $row['done'] ? ' done' : '' ?>"> <?php echo $row['title']; ?> </td>
-                  <td class="row<?php echo $row['done'] ? ' done' : '' ?>" > <?php echo $row['task']; ?> </td>
+                  <td> <?//php echo $row['id']; ?> </td>
+                  <td class="row<?//php echo $row['done'] ? ' done' : '' ?>"> <?//php echo $row['title']; ?> </td>
+                  <td class="row<?//php echo $row['done'] ? ' done' : '' ?>" > <?//php echo $row['task']; ?> </td>
                   <td>
-                     <?php if (!$row['done']) { ?>
-                        <a class="link" href="index.php?as=done&row=<?php echo $row['id']; ?>">&#9989;</a> 
-                     <?php } ?>
+                     <?//php if (!$row['done']) { ?>
+                        <a class="link" href="index.php?as=done&row=<?//php echo $row['id']; ?>">&#9989;</a> 
+                     <?//php } ?>
                   </td>
                   <td> 
-                     <?php if (!$row['done']) { ?>
-                        <a href="update.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a> 
-                     <?php } ?> 
+                     <?//php if (!$row['done']) { ?>
+                        <a href="update.php?update=<?//php echo $row['id']; ?>">&#9999;&#65039;</a> 
+                     <?//php } ?> 
                   </td>
                   <td>
-                     <a class="link" href="index.php?delete=<?php echo $row['id']; ?>">&#x274C;</a> 
+                     <a class="link" href="delete.php?delete=<?//php echo $row['id']; ?>">&#x274C;</a> 
                   </td>
                </tr>
-               <?php } ?>
+               <?//php } ?>
             </tbody>
          </section>
       </main>

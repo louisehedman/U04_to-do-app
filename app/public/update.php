@@ -3,9 +3,9 @@ include 'php_db.php';
 include 'headerfooter.php';
 
 $update = false;
-$title = '';
-$task = '';
-$id = 0;
+//$title = '';
+//$task = '';
+//$id = 0;
 
 if (isset($_GET['update'])) {
     $id = $_GET['update'];
@@ -35,7 +35,7 @@ if (isset($_GET['update'])) {
     $statement->execute();
     $title = "";
     $task = "";
-    header("Location: index.php");
+    header("Location: read.php");
  }
  ?>
 

@@ -15,7 +15,6 @@ function header_temp($title) {
       <div id="page-container">
       <header>
          <h1>U04 - To do app</h1>
-         <img src="\assets\img\2022.jpg" alt="Numbers 2022 on tooth pickers"/>
       </header>
       <div id="content-wrap">
       <main>

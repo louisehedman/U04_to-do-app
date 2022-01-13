@@ -1,5 +1,5 @@
 <?php
-include('php_db.php');
+include 'php_db.php';
 include 'headerfooter.php';
 
 $title = '';
@@ -25,7 +25,7 @@ if (isset($_POST['add'])) {
    ];
    $statement->execute($params);
    }
-   header("Location: index.php");
+   header("Location: read.php");
 }
 
 ?>
