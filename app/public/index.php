@@ -1,7 +1,7 @@
 <?php 
 include('php_db.php'); 
-include('create.php');
-include('update.php');
+//include('create.php');
+//include('update.php');
 include('delete.php');
 
 //$update = false;
@@ -109,11 +109,11 @@ if (isset($_GET['as'], $_GET['row'])) {
                <label for="task">Task&nbsp;</label>
                <input id="task" type="text" name="task" value="<?php echo $task; ?>">
                <div>
-                  <?php if ($update == true): ?>
+                  <?//php if ($update == true): ?>
                      <button type="submit" name="update" class="submitbtn">Update</button>
-                  <?php else: ?>
+                  <?//php else: ?>
                      <button type="submit" name="add" class="submitbtn">Add task</button>
-                  <?php endif ?>
+                  <?//php endif ?>
                </div>
                   <?php if (isset($notset)) { ?>
                   <p class="error"><?php echo $notset; ?></p>
@@ -134,6 +134,7 @@ if (isset($_GET['as'], $_GET['row'])) {
                </tr>
             </thead>
             <tbody>
+               <a href="create.php">Create new task</a>
                      
             <?php foreach ($rows as $row) { ?>
                <tr>
@@ -147,7 +148,7 @@ if (isset($_GET['as'], $_GET['row'])) {
                   </td>
                   <td> 
                      <?php if (!$row['done']) { ?>
-                        <a href="index.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a> 
+                        <a href="update.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a> 
                      <?php } ?> 
                   </td>
                   <td>
