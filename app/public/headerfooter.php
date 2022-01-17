@@ -1,5 +1,7 @@
 <?php
-function header_temp($title) {
+
+function header_temp($title)
+{
     echo <<<EOT
     <!DOCTYPE html>
     <html lang="en">
@@ -21,7 +23,8 @@ function header_temp($title) {
     EOT;
 }
 
-function footer_temp() {
+function footer_temp()
+{
     echo <<<EOT
     </main>
          </div>
@@ -35,4 +38,3 @@ function footer_temp() {
 </html>
 EOT;
 }
-?>

@@ -6,8 +6,7 @@ include 'headerfooter.php';
 if (isset($_GET['delete'])) {
     $id = $_GET['delete'];
     $query = "DELETE FROM list WHERE id = '$id'";
-    $statement = $db->prepare($query);
-    $statement->execute();
+    $stmt = $db->prepare($query);
+    $stmt->execute();
     header("Location: read.php");
-    } 
- 
+}

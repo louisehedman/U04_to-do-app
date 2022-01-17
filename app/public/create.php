@@ -10,42 +10,38 @@ $notset = '';
 if (isset($_POST['add'])) {
    if (empty($_POST['title'])) {
       $notset = "Title can't be blank";
-   }
-   elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])){
+   } elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])) {
       $notset = "Input can't consist of whitespace";
-   }
-    else{
+   } else {
       $query = <<<SQL
       INSERT INTO list (title, task, done) VALUES (:title, :task, 0);  
-      SQL;   
-      $statement = $db->prepare($query);
+      SQL;
+      $stmt = $db->prepare($query);
       $params = [
-      'title' => $_POST['title'],
-      'task' => $_POST['task'],
-   ];
-   $statement->execute($params);
+         'title' => $_POST['title'],
+         'task' => $_POST['task'],
+      ];
+      $stmt->execute($params);
    }
    header("Location: read.php");
 }
 
 ?>
-<?=header_temp('Create')?>
+<?= header_temp('Create') ?>
 <section>
-            <form method="post" action="create.php" >
-               <input type="hidden" name="id" value="<?php echo $id; ?>";>
-               <label for="title">Title</label>
-               <input id="title" type="text" name="title" value="<?php echo $task; ?>">
-               <br>
-               <label for="task">Task&nbsp;</label>
-               <input id="task" type="text" name="task" value="<?php echo $task; ?>">
-               <div>
-                  <? //php if ($update == true): ?>
-                     <button type="submit" name="add" class="submitbtn">Add task</button>
-                  <? //php endif ?>
-               </div>
-                  <?php if (isset($notset)) { ?>
-                  <p class="error"><?php echo $notset; ?></p>
-                  <?php } ?>
-            </form>
+   <form method="post" action="create.php">
+      <input type="hidden" name="id" value="<?php echo $id; ?>" ;>
+      <label for="title">Title</label>
+      <input id="title" type="text" name="title" value="<?php echo $task; ?>">
+      <br>
+      <label for="task">Task&nbsp;</label>
+      <input id="task" type="text" name="task" value="<?php echo $task; ?>">
+      <div>
+         <button type="submit" name="add" class="submitbtn">Add task</button>
+      </div>
+      <?php if (isset($notset)) { ?>
+         <p class="error"><?php echo $notset; ?></p>
+      <?php } ?>
+   </form>
 
-<?=footer_temp()?>
+   <?= footer_temp() ?>
