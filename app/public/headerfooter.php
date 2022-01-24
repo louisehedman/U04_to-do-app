@@ -1,5 +1,8 @@
 <?php
 
+// These functions will be included on every page to create header and footer. 
+//With EOT you don't have to worry about quotes
+
 function header_temp($title)
 {
     echo <<<EOT
@@ -10,7 +13,7 @@ function header_temp($title)
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <meta name="description" content="An app to create a to do list for year 2022">
-            <link rel="stylesheet" type="text/css" href="style.css">
+            <link rel="stylesheet" type="text/css" href="styles.css">
             <title>$title</title>
         </head>
         <body>

@@ -4,14 +4,16 @@ include 'headerfooter.php';
 
 ?>
 
-<?= header_temp('Read') ?>
-<a href="index.php">Home</a>
-<a href="create.php">Create new task</a>
+<?= header_temp('All my tasks') ?>
+<div class="nav-welcome">
+   <a class="nav" href="index.php">Home</a>
+   <a class="nav" href="create.php">Create new task</a>
+</div>
 <?php $rows = $db->query('SELECT * FROM list'); ?>
-<table>
+<table class="table">
    <thead>
       <tr>
-         <th width="7%">ID</th>
+         <th width="7%">Nr</th>
          <th>Title</th>
          <th>Task</th>
          <th width="10%">Done</th>
