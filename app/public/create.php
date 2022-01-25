@@ -7,21 +7,25 @@ $task = '';
 $id = 0;
 $notset = '';
 
-// When user clicks create new task, the user can fill in the form. If there is no problem with the input due to
-// the first if statements it will add to database and user will be directed back to read page. 
+/* When user clicks create new task, the user can fill in the form. If there is no problem with the input due to
+the first if statements it will add to database and user will be directed back to read page.*/
 
 if (isset($_POST['add'])) {
    if (empty($_POST['title'])) {
       $notset = "Title can't be blank";
    } elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])) {
       $notset = "Input can't consist of whitespace";
+   } elseif (!ctype_alnum(str_replace(' ','', $_POST['title']))) {
+      $notset = "Only letters a-z and numbers are allowed";
+   } elseif (!ctype_alnum(str_replace(' ','', $_POST['task']))) {
+      $notset = "Only letters a-z and numbers are allowed";
    } else {
       $query = "INSERT INTO list (title, task, done) VALUES (:title, :task, 0)";  
       $stmt = $db->prepare($query);
       $params = [
-         'title' => $_POST['title'],
-         'task' => $_POST['task'],
-      ];
+         'title' => $_POST['title'], 
+         'task' => $_POST['task']
+      ]; 
       $stmt->execute($params);
       header("Location: read.php");
    }

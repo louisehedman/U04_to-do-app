@@ -16,8 +16,8 @@ if (isset($_GET['update'])) {
    }
 }
 
-// The user can fill in the form again with the former data filled in. If there is no problem with the input due to
-// the first if statements it will update the task data in the database and the user will be directed back to read page.
+/* The user can fill in the form again with the former data filled in. If there is no problem with the input due to
+the first if statements it will update the task data in the database and the user will be directed back to read page.*/
 
 if (isset($_POST['update'])) {
    $id = $_POST['id'];
@@ -27,6 +27,10 @@ if (isset($_POST['update'])) {
       $notset = "Title can't be blank";
    } elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])) {
       $notset = "Input can't consist of whitespace";
+   } elseif (!ctype_alnum(str_replace(' ','', $_POST['title']))) {
+      $notset = "Only letters a-z and numbers are allowed";
+   } elseif (!ctype_alnum(str_replace(' ','', $_POST['task']))) {
+      $notset = "Only letters a-z and numbers are allowed";
    } else {
    $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
    $stmt = $db->prepare($query);
@@ -51,7 +55,7 @@ if (isset($_POST['update'])) {
          <br>
          <label for="task">Task&nbsp;</label>
          <input id="task" type="text" name="task" value="<?php echo $task; ?>">
-         <div>
+         <div class="button">
             <button type="submit" name="update" class="submitbtn">Update</button>
          </div>
          <?php if (isset($notset)) { ?>
