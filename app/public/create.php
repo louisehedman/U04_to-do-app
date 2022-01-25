@@ -7,6 +7,9 @@ $task = '';
 $id = 0;
 $notset = '';
 
+// When user clicks create new task, the user can fill in the form. If there is no problem with the input due to
+// the first if statements it will add to database and user will be directed back to read page. 
+
 if (isset($_POST['add'])) {
    if (empty($_POST['title'])) {
       $notset = "Title can't be blank";
@@ -25,6 +28,7 @@ if (isset($_POST['add'])) {
 }
 
 ?>
+
 <?= header_temp('Create') ?>
 <section>
 <div class="nav-welcome">
@@ -40,7 +44,7 @@ if (isset($_POST['add'])) {
       <br>
       <label for="task">Task&nbsp;</label>
       <input id="task" type="text" name="task" value="<?php echo $task; ?>">
-      <div>
+      <div class="button">
          <button type="submit" name="add" class="submitbtn">Add task</button>
       </div>
       <?php if (isset($notset)) { ?>
@@ -48,5 +52,4 @@ if (isset($_POST['add'])) {
       <?php } ?>
    </form>
    </div>
-
    <?= footer_temp() ?>

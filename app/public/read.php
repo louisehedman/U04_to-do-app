@@ -1,15 +1,15 @@
 <?php
 include 'php_db.php';
 include 'headerfooter.php';
-
 ?>
+
+<?php /*Read all the rows in database*/ $rows = $db->query('SELECT * FROM list'); ?>
 
 <?= header_temp('All my tasks') ?>
 <div class="nav-welcome">
    <a class="nav" href="index.php">Home</a>
    <a class="nav" href="create.php">Create new task</a>
 </div>
-<?php $rows = $db->query('SELECT * FROM list'); ?>
 <table class="table">
    <thead>
       <tr>
@@ -22,12 +22,11 @@ include 'headerfooter.php';
       </tr>
    </thead>
    <tbody>
-
-      <?php foreach ($rows as $row) { ?>
+      <?php /* output the data from every row */ foreach ($rows as $row) { ?>
          <tr>
             <td> <?php echo $row['id']; ?> </td>
-            <td class="row<?php echo $row['done'] ? ' done' : '' ?>"> <?php echo $row['title']; ?> </td>
-            <td class="row<?php echo $row['done'] ? ' done' : '' ?>"> <?php echo $row['task']; ?> </td>
+            <td class="<?php echo $row['done'] ? 'done' : '' ?>"> <?php echo $row['title']; ?> </td>
+            <td class="<?php echo $row['done'] ? 'done' : '' ?>"> <?php echo $row['task']; ?> </td>
             <td>
                <?php if (!$row['done']) { ?>
                   <a class="link" href="done.php?as=done&row=<?php echo $row['id']; ?>">&#9989;</a>

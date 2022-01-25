@@ -2,12 +2,11 @@
 include 'php_db.php';
 include 'headerfooter.php';
 
-$update = false;
+// When user clicks update task the task data will be read. 
 
 if (isset($_GET['update'])) {
    $id = $_GET['update'];
 
-   $update = true;
    $rows = $db->query("SELECT * FROM list WHERE id = '$id'");
 
    foreach ($rows as $row) {
@@ -16,6 +15,9 @@ if (isset($_GET['update'])) {
       $task = $row['task'];
    }
 }
+
+// The user can fill in the form again with the former data filled in. If there is no problem with the input due to
+// the first if statements it will update the task data in the database and the user will be directed back to read page.
 
 if (isset($_POST['update'])) {
    $id = $_POST['id'];
@@ -50,7 +52,7 @@ if (isset($_POST['update'])) {
          <label for="task">Task&nbsp;</label>
          <input id="task" type="text" name="task" value="<?php echo $task; ?>">
          <div>
-               <button type="submit" name="update" class="submitbtn">Update</button>
+            <button type="submit" name="update" class="submitbtn">Update</button>
          </div>
          <?php if (isset($notset)) { ?>
             <p class="error"><?php echo $notset; ?></p>
