@@ -27,22 +27,22 @@ if (isset($_POST['update'])) {
       $notset = "Title can't be blank";
    } elseif (ctype_space($_POST['title']) || ctype_space($_POST['task'])) {
       $notset = "Input can't consist of whitespace";
-   } elseif (!ctype_alnum(str_replace(' ','', $_POST['title']))) {
+   } elseif (!ctype_alnum(str_replace(' ', '', $_POST['title']))) {
       $notset = "Only letters a-z and numbers are allowed";
-   } elseif (!ctype_alnum(str_replace(' ','', $_POST['task']))) {
+   } elseif (!ctype_alnum(str_replace(' ', '', $_POST['task']))) {
       $notset = "Only letters a-z and numbers are allowed";
    } else {
-   $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
-   $stmt = $db->prepare($query);
-   $stmt->execute();
-   header("Location: read.php"); 
-}   
+      $query = "UPDATE list SET title = '$title', task = '$task' WHERE id = '$id'";
+      $stmt = $db->prepare($query);
+      $stmt->execute();
+      header("Location: read.php");
+   }
 }
 ?>
 
 <?= header_temp('Update') ?>
 <section>
-   <div class="nav-welcome">
+   <div class="nav-div">
       <a class="nav" href="index.php">Home</a>
       <a class="nav" href="read.php">Back to my tasks</a>
    </div>

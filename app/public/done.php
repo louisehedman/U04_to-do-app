@@ -1,7 +1,8 @@
 <?php
 include 'php_db.php';
 
-// If the done link is clicked the tinyint will change to 1, and the class done will be activated which make the title and task line throughed
+/* If the done link is clicked the tinyint will change to 1, and the class done will be activated
+in read.php which line through the title and task */
 
 if (isset($_GET['as'], $_GET['row'])) {
     $as = $_GET['as'];

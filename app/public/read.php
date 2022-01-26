@@ -6,7 +6,7 @@ include 'headerfooter.php';
 <?php /*Read all the rows in database*/ $rows = $db->query('SELECT * FROM list'); ?>
 
 <?= header_temp('All my tasks') ?>
-<div class="nav-welcome">
+<div class="nav-div">
    <a class="nav" href="index.php">Home</a>
    <a class="nav" href="create.php">Create new task</a>
 </div>
@@ -25,6 +25,7 @@ include 'headerfooter.php';
       <?php /* output the data from every row */ foreach ($rows as $row) { ?>
          <tr>
             <td> <?php echo $row['id']; ?> </td>
+            <!-- If done is clicked the class done will be activated, otherwise not -->
             <td class="<?php echo $row['done'] ? 'done' : '' ?>"> <?php echo $row['title']; ?> </td>
             <td class="<?php echo $row['done'] ? 'done' : '' ?>"> <?php echo $row['task']; ?> </td>
             <td>
@@ -33,6 +34,7 @@ include 'headerfooter.php';
                <?php } ?>
             </td>
             <td>
+               <!-- if done is not clicked it is able to update the task, otherwise the link will disappear -->
                <?php if (!$row['done']) { ?>
                   <a href="update.php?update=<?php echo $row['id']; ?>">&#9999;&#65039;</a>
                <?php } ?>

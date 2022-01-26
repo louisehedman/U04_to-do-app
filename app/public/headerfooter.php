@@ -19,7 +19,7 @@ function header_temp($title)
         <body>
       <div id="page-container">
       <header>
-         <h1>U04 - To do app</h1>
+         <h1>U04 - To Do App</h1>
       </header>
       <div id="content-wrap">
       <main>
